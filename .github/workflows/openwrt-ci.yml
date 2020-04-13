@@ -7,21 +7,20 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # 
 
-name: by103云编译
+name: Test
 
 on:
-  schedule:
-    - cron: 0 20 * * *
-  push:
-    tags:
-      - '*'
+  watch:
+    types: started
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
 
-  build_openwrt:
-
-    name: Build OpenWrt and release
-    runs-on: ubuntu-18.04
+    steps:
+       - name: Checkout
+         uses: actions/checkout@v2
 
     steps:
       - name: Checkout
