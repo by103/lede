@@ -7,16 +7,21 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # 
 
-name: Test
+name: OpenWrt-CI
 
 on:
-  watch:
-    types: started
+  schedule:
+    - cron: 0 20 * * *
+  push:
+    tags:
+      - '*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+
+  build_openwrt:
+
+    name: Build OpenWrt and release
+    runs-on: ubuntu-18.04
 
     steps:
        - name: Checkout
